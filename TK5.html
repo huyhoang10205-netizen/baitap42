@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài tập TK5: Accordion đơn giản</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+.accordion-item { border: 1px solid #dce5f4; border-radius: 7px; margin: 12px 0; overflow: hidden; }
+.accordion-title { display: block; width: 100%; padding: 16px; background: #e9f1ff; color: #173b72; text-align: left; border-radius: 0; }
+.accordion-title:hover { background: #d8e8ff; }
+.accordion-title .arrow { float: right; font-weight: bold; }
+.accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; background: #fff; }
+.accordion-content p { padding: 16px; margin: 0; }
+</style>
+</head>
+<body>
+    <header><h1>Bài tập TK5: Accordion đơn giản</h1><p>classList.toggle() kết hợp max-height và transition</p></header>
+    <nav aria-label="Menu các bài tập"><a href="42.html">Trang chủ</a>
+<a href="TK5.html" class="active" aria-current="page">TK5</a>
+<a href="TK7.html">TK7</a>
+<a href="TK8.html">TK8</a>
+<a href="K4.html">K4</a>
+<a href="K6.html">K6</a>
+<a href="K8.html">K8</a></nav>
+    <main>
+<section class="panel">
+    <h2>Accordion - Câu hỏi thường gặp</h2>
+    <p class="hint">Bấm vào từng tiêu đề để đóng/mở nội dung.</p>
+    <div class="accordion-item">
+        <button class="accordion-title" aria-expanded="false">1. HTML là gì? <span class="arrow">+</span></button>
+        <div class="accordion-content"><p>HTML là ngôn ngữ đánh dấu dùng để tạo cấu trúc nội dung trang web.</p></div>
+    </div>
+    <div class="accordion-item">
+        <button class="accordion-title" aria-expanded="false">2. CSS dùng để làm gì? <span class="arrow">+</span></button>
+        <div class="accordion-content"><p>CSS giúp định dạng màu sắc, phông chữ, kích thước và bố cục trang web.</p></div>
+    </div>
+    <div class="accordion-item">
+        <button class="accordion-title" aria-expanded="false">3. JavaScript dùng để làm gì? <span class="arrow">+</span></button>
+        <div class="accordion-content"><p>JavaScript xử lý tương tác, sự kiện và cập nhật nội dung trên trang web.</p></div>
+    </div>
+</section>
+</main>
+    <footer>Bài tập 42 - HTML, CSS và JavaScript</footer>
+    <script>
+
+// Lấy tất cả các tiêu đề accordion.
+var tieuDe = document.querySelectorAll(".accordion-title");
+
+for (var i = 0; i < tieuDe.length; i++) {
+    tieuDe[i].addEventListener("click", function () {
+        // Thêm hoặc bỏ class "active" khi bấm.
+        this.classList.toggle("active");
+        var dangMo = this.classList.contains("active");
+        var noiDung = this.nextElementSibling;
+        this.setAttribute("aria-expanded", dangMo ? "true" : "false");
+        this.querySelector(".arrow").textContent = dangMo ? "−" : "+";
+        // max-height + CSS transition tạo hiệu ứng trượt.
+        noiDung.style.maxHeight = dangMo ? noiDung.scrollHeight + "px" : "0px";
+    });
+}
+
+</script>
+</body>
+</html>

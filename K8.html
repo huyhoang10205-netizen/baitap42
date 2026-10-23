@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài tập K8: Tính Chỉ Số BMI và Phân Loại</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <header><h1>Bài tập K8: Tính Chỉ Số BMI và Phân Loại</h1><p>BMI = cân nặng (kg) / chiều cao (m)²</p></header>
+    <nav aria-label="Menu các bài tập"><a href="42.html">Trang chủ</a>
+<a href="TK5.html">TK5</a>
+<a href="TK7.html">TK7</a>
+<a href="TK8.html">TK8</a>
+<a href="K4.html">K4</a>
+<a href="K6.html">K6</a>
+<a href="K8.html" class="active" aria-current="page">K8</a></nav>
+    <main>
+<section class="panel">
+    <h2>Tính chỉ số BMI</h2>
+    <form id="bieuMauBMI">
+        <p><label for="canNang">Cân nặng (kg):</label><input type="text" inputmode="decimal" id="canNang" placeholder="Ví dụ: 60 hoặc 60,5" autocomplete="off"></p>
+        <p><label for="chieuCao">Chiều cao (m):</label><input type="text" inputmode="decimal" id="chieuCao" placeholder="Ví dụ: 1,65 hoặc 165" autocomplete="off"></p>
+        <button type="submit">Tính BMI</button>
+    </form>
+    <div class="result" id="ketQua" aria-live="polite">Nhập dữ liệu và bấm “Tính BMI”.</div>
+    <p class="hint">Có thể nhập dấu phẩy hoặc dấu chấm. Chiều cao: 1,65 (m) hoặc 165 (cm).</p>
+    <p class="hint">Phân loại tham khảo cho người trưởng thành: &lt; 18,5: Thiếu cân; 18,5 đến dưới 25: Bình thường; từ 25 trở lên: Thừa cân. BMI không thay thế tư vấn y tế.</p>
+</section>
+</main>
+    <footer>Bài tập 42 - HTML, CSS và JavaScript</footer>
+    <script>
+
+// Chuyển chuỗi người dùng nhập thành số (nhận cả 60,5 và 60.5).
+function docSo(chuoi) {
+    var giaTri = chuoi.trim().replace(",", ".");
+    if (!/^\d+(\.\d+)?$/.test(giaTri)) {
+        return NaN;
+    }
+    return Number(giaTri);
+}
+
+document.getElementById("bieuMauBMI").addEventListener("submit", function (suKien) {
+    suKien.preventDefault(); // Không tải lại trang.
+
+    var canNang = docSo(document.getElementById("canNang").value);
+    var chieuCao = docSo(document.getElementById("chieuCao").value);
+    var ketQua = document.getElementById("ketQua");
+
+    if (!Number.isFinite(canNang) || !Number.isFinite(chieuCao) || canNang <= 0 || chieuCao <= 0) {
+        ketQua.textContent = "Vui lòng nhập cân nặng và chiều cao hợp lệ, lớn hơn 0.";
+        return;
+    }
+
+    // Nhập chiều cao 165 được hiểu là 165 cm = 1,65 m.
+    if (chieuCao > 3) {
+        chieuCao = chieuCao / 100;
+    }
+
+    if (chieuCao < 0.5 || chieuCao > 3) {
+        ketQua.textContent = "Chiều cao chưa hợp lý. Hãy nhập theo mét (1,65) hoặc centimet (165).";
+        return;
+    }
+
+    var bmi = canNang / (chieuCao * chieuCao);
+    var phanLoai;
+    if (bmi < 18.5) {
+        phanLoai = "Thiếu cân";
+    } else if (bmi < 25) {
+        phanLoai = "Bình thường";
+    } else {
+        phanLoai = "Thừa cân";
+    }
+
+    ketQua.textContent = "BMI của bạn: " + bmi.toFixed(2) + " - Phân loại: " + phanLoai;
+});
+
+</script>
+</body>
+</html>

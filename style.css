@@ -1,0 +1,30 @@
+/* CSS chung cho trang 42.html va 6 bai tap */
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Arial, Helvetica, sans-serif; color: #17243b; background: #f2f5fb; line-height: 1.6; }
+header { padding: 24px 16px; background: #163a73; color: white; text-align: center; }
+header h1 { margin: 0 0 4px; font-size: 27px; }
+header p { margin: 0; opacity: .92; }
+nav { background: #0f2a55; text-align: center; padding: 9px; }
+nav a { display: inline-block; padding: 9px 13px; margin: 3px; color: #fff; text-decoration: none; border-radius: 6px; }
+nav a:hover, nav a.active { background: #2b6bca; }
+main { max-width: 960px; margin: 28px auto; padding: 0 16px; }
+.panel { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 18px rgba(22,58,115,.08); margin-bottom: 22px; }
+h2 { color: #163a73; margin: 0 0 14px; font-size: 23px; }
+h3 { color: #184278; }
+p { margin: 7px 0 14px; }
+button { border: none; background: #195cbc; color: white; padding: 11px 17px; font-size: 15px; border-radius: 7px; cursor: pointer; }
+button:hover { background: #11488f; }
+input { max-width: 100%; border: 1px solid #a8b8d0; padding: 10px 12px; border-radius: 7px; font-size: 16px; }
+label { display: inline-block; margin: 7px 7px 7px 0; }
+.result { padding: 14px; border-radius: 8px; background: #ebf3ff; margin-top: 16px; min-height: 51px; word-break: break-word; }
+.hint { color: #51637d; font-size: 14px; }
+.assignment-card { display: inline-block; vertical-align: top; width: 48%; padding: 18px; margin: 0 1% 15px 0; border: 1px solid #e1e8f5; background: #fbfcff; border-radius: 9px; }
+.assignment-card h3 { margin: 0 0 7px; }
+.assignment-card p { min-height: 50px; }
+.assignment-card a { display: inline-block; background: #195cbc; color: #fff; padding: 8px 13px; border-radius: 6px; text-decoration: none; }
+.assignment-card a:hover { background: #11488f; }
+.info-table { border-collapse: collapse; width: 100%; }
+.info-table td { padding: 10px; border-bottom: 1px solid #e1e8f2; }
+.info-table td:first-child { width: 180px; font-weight: bold; }
+footer { padding: 15px; text-align: center; color: #5a6780; font-size: 14px; }
+@media (max-width: 600px) { .assignment-card { display: block; width: 100%; } .info-table td:first-child { width: 135px; } .panel { padding: 17px; } header h1 { font-size: 23px; } }

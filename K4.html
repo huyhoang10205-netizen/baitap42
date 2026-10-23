@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài tập K4: Phân Trang Danh Sách</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+#danhSach { padding-left: 25px; }
+#danhSach li { padding: 5px 0; border-bottom: 1px solid #edf0f6; }
+.page-buttons button { margin: 5px 6px 5px 0; min-width: 40px; }
+.page-buttons button.dang-chon { background: #0c2a51; }
+</style>
+</head>
+<body>
+    <header><h1>Bài tập K4: Phân Trang Danh Sách</h1><p>Hiển thị 50 mục, mỗi trang 10 mục</p></header>
+    <nav aria-label="Menu các bài tập"><a href="42.html">Trang chủ</a>
+<a href="TK5.html">TK5</a>
+<a href="TK7.html">TK7</a>
+<a href="TK8.html">TK8</a>
+<a href="K4.html" class="active" aria-current="page">K4</a>
+<a href="K6.html">K6</a>
+<a href="K8.html">K8</a></nav>
+    <main>
+<section class="panel">
+    <h2>Danh sách 50 mục</h2>
+    <p class="hint">Bấm các số trang để xem 10 mục tương ứng.</p>
+    <ol id="danhSach"></ol>
+    <div class="page-buttons" id="phanTrang" aria-label="Phân trang"></div>
+    <div class="result" id="thongTinTrang" aria-live="polite"></div>
+</section>
+</main>
+    <footer>Bài tập 42 - HTML, CSS và JavaScript</footer>
+    <script>
+
+var danhSach = [];
+for (var i = 1; i <= 50; i++) {
+    danhSach.push("Mục số " + i);
+}
+
+var soMucMoiTrang = 10;
+var tongSoTrang = Math.ceil(danhSach.length / soMucMoiTrang);
+
+function hienThiTrang(trang) {
+    var batDau = (trang - 1) * soMucMoiTrang;
+    var ketThuc = Math.min(batDau + soMucMoiTrang, danhSach.length);
+    var vungDanhSach = document.getElementById("danhSach");
+    vungDanhSach.innerHTML = "";
+    vungDanhSach.start = batDau + 1;
+
+    for (var i = batDau; i < ketThuc; i++) {
+        var li = document.createElement("li");
+        li.textContent = danhSach[i];
+        vungDanhSach.appendChild(li);
+    }
+
+    var vungNut = document.getElementById("phanTrang");
+    vungNut.innerHTML = "";
+    for (var soTrang = 1; soTrang <= tongSoTrang; soTrang++) {
+        var nut = document.createElement("button");
+        nut.textContent = soTrang;
+        nut.type = "button";
+        if (soTrang === trang) {
+            nut.classList.add("dang-chon");
+            nut.setAttribute("aria-current", "page");
+        }
+        // Cho nút nhớ đúng số trang tương ứng.
+        nut.onclick = (function (n) {
+            return function () { hienThiTrang(n); };
+        })(soTrang);
+        vungNut.appendChild(nut);
+    }
+
+    document.getElementById("thongTinTrang").textContent =
+        "Đang xem trang " + trang + "/" + tongSoTrang + " (mục " + (batDau + 1) + " đến " + ketThuc + ")";
+}
+
+hienThiTrang(1);
+
+</script>
+</body>
+</html>

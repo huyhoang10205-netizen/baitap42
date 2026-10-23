@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài tập K6: Xử Lý Sự Kiện Bàn Phím</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+#khungDiChuyen { position: relative; height: 300px; width: 100%; background: #ecf4ff; border: 2px dashed #90aed3; border-radius: 8px; overflow: hidden; }
+#khoiVuong { position: absolute; width: 85px; height: 55px; top: 100px; left: calc(50% - 42px); color: #fff; background: #195cbc; border-radius: 8px; text-align: center; line-height: 55px; font-weight: bold; }
+</style>
+</head>
+<body>
+    <header><h1>Bài tập K6: Xử Lý Sự Kiện Bàn Phím</h1><p>Dùng keydown để di chuyển khối div bằng phím mũi tên</p></header>
+    <nav aria-label="Menu các bài tập"><a href="42.html">Trang chủ</a>
+<a href="TK5.html">TK5</a>
+<a href="TK7.html">TK7</a>
+<a href="TK8.html">TK8</a>
+<a href="K4.html">K4</a>
+<a href="K6.html" class="active" aria-current="page">K6</a>
+<a href="K8.html">K8</a></nav>
+    <main>
+<section class="panel">
+    <h2>Điều khiển khối bằng bàn phím</h2>
+    <p>Nhấn phím <strong>↑</strong> để di chuyển lên, nhấn <strong>↓</strong> để di chuyển xuống.</p>
+    <div id="khungDiChuyen"><div id="khoiVuong">DIV</div></div>
+    <p class="hint" id="viTri">Vị trí: 100 px</p>
+    <button type="button" onclick="datLai()">Đặt lại vị trí</button>
+</section>
+</main>
+    <footer>Bài tập 42 - HTML, CSS và JavaScript</footer>
+    <script>
+
+var khoi = document.getElementById("khoiVuong");
+var khung = document.getElementById("khungDiChuyen");
+var viTriY = 100;
+var buocNhay = 15;
+
+function capNhatViTri() {
+    khoi.style.top = viTriY + "px";
+    document.getElementById("viTri").textContent = "Vị trí: " + viTriY + " px";
+}
+
+function datLai() {
+    viTriY = 100;
+    capNhatViTri();
+}
+
+document.addEventListener("keydown", function (suKien) {
+    var gioiHan = khung.clientHeight - khoi.offsetHeight;
+
+    if (suKien.key === "ArrowUp") {
+        suKien.preventDefault();
+        viTriY = Math.max(0, viTriY - buocNhay);
+    } else if (suKien.key === "ArrowDown") {
+        suKien.preventDefault();
+        viTriY = Math.min(gioiHan, viTriY + buocNhay);
+    } else {
+        return;
+    }
+    capNhatViTri();
+});
+
+</script>
+</body>
+</html>

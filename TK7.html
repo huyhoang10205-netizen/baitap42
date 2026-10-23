@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài tập TK7: Tạo chuỗi ngẫu nhiên</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <header><h1>Bài tập TK7: Tạo chuỗi ngẫu nhiên</h1><p>Tạo mật khẩu 8 ký tự gồm chữ cái thường và chữ số</p></header>
+    <nav aria-label="Menu các bài tập"><a href="42.html">Trang chủ</a>
+<a href="TK5.html">TK5</a>
+<a href="TK7.html" class="active" aria-current="page">TK7</a>
+<a href="TK8.html">TK8</a>
+<a href="K4.html">K4</a>
+<a href="K6.html">K6</a>
+<a href="K8.html">K8</a></nav>
+    <main>
+<section class="panel">
+    <h2>Tạo mật khẩu ngẫu nhiên</h2>
+    <p>Mật khẩu dài 8 ký tự, chắc chắn có ít nhất một chữ cái thường và một chữ số.</p>
+    <button type="button" onclick="taoMatKhau()">Tạo mật khẩu</button>
+    <div class="result" id="ketQua" aria-live="polite">Bấm nút để tạo mật khẩu.</div>
+</section>
+</main>
+    <footer>Bài tập 42 - HTML, CSS và JavaScript</footer>
+    <script>
+
+function layKyTu(chuoi) {
+    return chuoi.charAt(Math.floor(Math.random() * chuoi.length));
+}
+
+function taoMatKhau() {
+    var chuThuong = "abcdefghijklmnopqrstuvwxyz";
+    var chuSo = "0123456789";
+    var tatCa = chuThuong + chuSo;
+
+    // Đảm bảo mật khẩu có cả chữ thường và số.
+    var mangKyTu = [layKyTu(chuThuong), layKyTu(chuSo)];
+    while (mangKyTu.length < 8) {
+        mangKyTu.push(layKyTu(tatCa));
+    }
+
+    // Trộn vị trí các ký tự trong mảng.
+    for (var i = mangKyTu.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tam = mangKyTu[i];
+        mangKyTu[i] = mangKyTu[j];
+        mangKyTu[j] = tam;
+    }
+
+    document.getElementById("ketQua").textContent = "Mật khẩu: " + mangKyTu.join("");
+}
+
+</script>
+</body>
+</html>
